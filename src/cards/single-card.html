@@ -3,8 +3,22 @@
 <dom-module id="single-card">
   <template>
     <style>
-      :host {
-        display: block;
+      @import '../../master.css';
+    </style>
+    <style>
+      .single-card {
+        background: #f2f2f2;
+        border-radius: 4px;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        box-shadow: 0 5px 10px 0 #eeeef3;
+      }
+
+      .single-card div {
+        display: flex;
+        flex-direction: column;
       }
     </style>
 
@@ -16,7 +30,9 @@
 
       <div>
         <span>00:11:13</span>
-        <button>{{ cta }}</button>
+        <span>
+          <button>{{ cta }}</button>
+        </span>
       </div>
     </div>
 
@@ -28,6 +44,11 @@
      * @polymer
      */
     class SingleCard extends Polymer.Element {
+      constructor() {
+        super();
+      }
+
+
       static get is() {
         return 'single-card';
       }
