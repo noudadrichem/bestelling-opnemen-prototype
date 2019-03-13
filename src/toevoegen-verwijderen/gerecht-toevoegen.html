@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/vaadin-text-field/vaadin-text-field.html">
 <link rel="import" href="../../bower_components/vaadin-checkbox/vaadin-checkbox.html">
 <link rel="import" href="../../bower_components/vaadin-button/vaadin-button.html">
+<link rel="import" href="../../bower_components/vaadin-dialog/vaadin-dialog.html">
 
 
 <dom-module id="gerecht-toevoegen">
@@ -48,24 +49,34 @@
 
 
 
+<!-- 
+<div class="popUp1">
+  <div class="modal-content">
+    <p>Bevestig het toevoegen van het gerecht</p>
+    <vaadin-button id="knop1">
+      Nee
+    </vaadin-button>
+    <vaadin-button id="knop2">
+      Ja
+    </vaadin-button>
 
+    <div class="close">+</div>
+  </div>
+</div>
 
+<div class="popUp2">
+  <div class="modal-content">
+    <p>Weet u zeker dat u wilt afsluiten?</p>
+    <vaadin-button id="knop1">
+      Nee
+    </vaadin-button>
+    <vaadin-button id="knop2">
+      Ja
+    </vaadin-button>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <div class="close">+</div>
+  </div>
+</div> -->
 
 
   </template>
@@ -80,5 +91,8 @@
     }
 
     window.customElements.define(GerechtToevoegen.is, GerechtToevoegen);
+
+    
+    
   </script>
 </dom-module>
