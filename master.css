@@ -1,0 +1,16 @@
+* {
+  margin: 0 ;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:host, body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', 'Roboto', sans-serif;
+  color: #929292;
+}
+
+.container {
+  max-width: 1184px;
+  padding: 0 24px;
+  margin: 0 auto;
+}
