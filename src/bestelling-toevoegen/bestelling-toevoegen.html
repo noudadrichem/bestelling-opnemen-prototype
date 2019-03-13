@@ -1,0 +1,30 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="bestelling-toevoegen">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <div class="bestelling-toevoegen">
+      
+    </div>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class BestellingToevoegen extends Polymer.Element {
+      static get is() {
+        return 'bestelling-toevoegen';
+      }
+    }
+
+    window.customElements.define(BestellingToevoegen.is, BestellingToevoegen);
+  </script>
+</dom-module>

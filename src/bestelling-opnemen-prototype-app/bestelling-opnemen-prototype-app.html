@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../cards/container.html">
 
 <dom-module id="bestelling-opnemen-prototype-app">
   <template>
@@ -7,7 +8,12 @@
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+
+    <cards-container
+      gerechten="{{gerechten}}"
+      cta="Begin bereiding"
+    ></cards-container>
+
   </template>
 
   <script>
@@ -16,15 +22,68 @@
      * @polymer
      */
     class BestellingOpnemenPrototypeApp extends Polymer.Element {
-      static get is() { return 'bestelling-opnemen-prototype-app'; }
+      static get is() {
+        return 'bestelling-opnemen-prototype-app';
+      }
+
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'bestelling-opnemen-prototype-app'
+          bestellingen: {
+            type: Array,
+            value: [0, 2]
+          },
+          inBereiding: {
+            type: Array,
+            value: [2]
+          },
+          gerechten: {
+            type: Array,
+            value: [
+            {
+              id: 0,
+              naam: 'Gerecht 1',
+              beschrijving: 'Dit is een beschrijvin van gerecht 1',
+              prijs: 4.95,
+              ingredienten: ['appel', 'peer'],
+              status: '' // een van ['', besteld', 'wordt bereidt', 'is bereidt']
+            },
+            {
+              id: 1,
+              naam: 'Gerecht 2',
+              beschrijving: 'Dit is een beschrijvin van gerecht 2',
+              prijs: 12.50,
+              ingredienten: ['moetje', 'hebben'],
+              status: '' // een van ['besteld', 'wordt bereidt', 'is bereidt']
+            },
+            {
+              id: 2,
+              naam: 'Gerecht 3',
+              beschrijving: 'Dit is een beschrijvin van gerecht 3',
+              prijs: 14.95,
+              ingredienten: ['banaan', 'ei'],
+              status: '' // een van ['besteld', 'wordt bereidt', 'is bereidt']
+            },
+          ]
           }
-        };
+        }
       }
+
+      bestellingToevoegen() {
+        console.log('bestelling toevoegen')
+      }
+
+      bestellingVoorbereiden() {
+        console.log('bestellingVoorbereiden')
+      }
+
+      bestellingAfvinken() {
+        console.log('bestellingAfvinken')
+      }
+
+      bestellingKlaren() {
+        console.log('bestellingKlaren')
+      }
+
     }
 
     window.customElements.define(BestellingOpnemenPrototypeApp.is, BestellingOpnemenPrototypeApp);

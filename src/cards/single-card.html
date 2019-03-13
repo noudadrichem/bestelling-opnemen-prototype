@@ -1,0 +1,51 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="single-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <div class="single-card">
+      <div>
+        <h3>{{ item.naam }}</h3>
+        <p>{{ item.beschrijving }}</p>
+      </div>
+
+      <div>
+        <span>00:11:13</span>
+        <button>{{ cta }}</button>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class SingleCard extends Polymer.Element {
+      static get is() {
+        return 'single-card';
+      }
+
+      static get properties() {
+        return {
+          item: {
+            type: Array,
+            notify: true
+          },
+          cta: {
+            type: String,
+            notify: true,
+          }
+        }
+      }
+    }
+
+    window.customElements.define(SingleCard.is, SingleCard);
+  </script>
+</dom-module>
