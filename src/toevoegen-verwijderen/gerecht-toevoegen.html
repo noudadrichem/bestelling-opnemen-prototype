@@ -1,0 +1,84 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/vaadin-text-field/vaadin-text-field.html">
+<link rel="import" href="../../bower_components/vaadin-checkbox/vaadin-checkbox.html">
+<link rel="import" href="../../bower_components/vaadin-button/vaadin-button.html">
+
+
+<dom-module id="gerecht-toevoegen">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+           
+    </style>
+
+    
+<label for="label1">Gerecht Toevoegen:</label>
+<vaadin-text-field placeholder="Gerecht"></vaadin-text-field>
+
+
+<br><br>
+<label>Ingredienten:</label>
+<br><br>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<br>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<br>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<br>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<vaadin-checkbox >APPELS</a></vaadin-checkbox>
+<br><br>
+
+<vaadin-button>
+  Cancel
+</vaadin-button>
+
+<vaadin-button>
+  Toevoegen
+</vaadin-button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class GerechtToevoegen extends Polymer.Element {
+      static get is() { return 'gerecht-toevoegen'; }
+    }
+
+    window.customElements.define(GerechtToevoegen.is, GerechtToevoegen);
+  </script>
+</dom-module>

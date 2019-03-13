@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../toevoegen-verwijderen/gerecht-toevoegen.html">
+<link rel="import" href="../toevoegen-verwijderen/gerecht-verwijderen.html">
 
 <dom-module id="bestelling-opnemen-prototype-app">
   <template>
@@ -7,8 +9,11 @@
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
-  </template>
+  
+  <gerecht-toevoegen></gerecht-toevoegen>
+  <gerecht-verwijderen></gerecht-verwijderen>
+  
+</template>
 
   <script>
     /**
