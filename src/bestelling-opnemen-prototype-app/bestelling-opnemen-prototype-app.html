@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="bestelling-opnemen-prototype-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class BestellingOpnemenPrototypeApp extends Polymer.Element {
+      static get is() { return 'bestelling-opnemen-prototype-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'bestelling-opnemen-prototype-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(BestellingOpnemenPrototypeApp.is, BestellingOpnemenPrototypeApp);
+  </script>
+</dom-module>

@@ -1,0 +1,7 @@
+{
+  "name": "bestelling-opnemen-prototype",
+  "short_name": "bestelling-opnemen-prototype",
+  "description": "Prototype voor aaui opdracht 3-1 bestellingen opnemen/afhandelen",
+  "start_url": "/",
+  "display": "standalone"
+}
