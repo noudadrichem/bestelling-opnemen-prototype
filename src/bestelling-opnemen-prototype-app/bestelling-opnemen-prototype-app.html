@@ -28,10 +28,19 @@
 
       static get properties() {
         return {
+          bestellingen: {
+            type: Array,
+            value: [0, 2]
+          },
+          inBereiding: {
+            type: Array,
+            value: [2]
+          },
           gerechten: {
             type: Array,
             value: [
             {
+              id: 0,
               naam: 'Gerecht 1',
               beschrijving: 'Dit is een beschrijvin van gerecht 1',
               prijs: 4.95,
@@ -39,6 +48,7 @@
               status: '' // een van ['', besteld', 'wordt bereidt', 'is bereidt']
             },
             {
+              id: 1,
               naam: 'Gerecht 2',
               beschrijving: 'Dit is een beschrijvin van gerecht 2',
               prijs: 12.50,
@@ -46,6 +56,7 @@
               status: '' // een van ['besteld', 'wordt bereidt', 'is bereidt']
             },
             {
+              id: 2,
               naam: 'Gerecht 3',
               beschrijving: 'Dit is een beschrijvin van gerecht 3',
               prijs: 14.95,
