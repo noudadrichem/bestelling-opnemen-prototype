@@ -1,0 +1,58 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="./single-card.html">
+
+
+<dom-module id="cards-container">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <div class="cards-container">
+      <h1>Wordt bereidt:</h1>
+
+      <template is="dom-repeat" items="{{gerechten}}">
+        <single-card
+          item="{{item}}"
+          cta="{{cta}}"
+        ></single-card>
+      </template>
+
+    </div>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class CardsContainer extends Polymer.Element {
+      static get is() {
+        return 'cards-container';
+      }
+
+      static get properties() {
+        return {
+          gerechten: {
+            type: Array,
+            notify: true,
+          },
+          cta: {
+            type: String,
+            notify: true,
+          }
+        }
+      }
+
+      listUpdated() {
+        console.log('ja toch')
+      }
+    }
+
+    window.customElements.define(CardsContainer.is, CardsContainer);
+  </script>
+</dom-module>
