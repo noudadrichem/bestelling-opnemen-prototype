@@ -7,7 +7,9 @@
     "vaadin-text-field": "vaadin/vaadin-text-field#^2.3.5",
     "vaadin-checkbox": "vaadin/vaadin-checkbox#^2.2.7",
     "vaadin-button": "vaadin/vaadin-button#^2.1.4",
-    "vaadin-dialog": "vaadin/vaadin-dialog#^2.2.1"
+    "vaadin-dialog": "vaadin/vaadin-dialog#^2.2.1",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^3.0.1",
+    "paper-radio-group": "PolymerElements/paper-radio-group#^3.0.1"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",

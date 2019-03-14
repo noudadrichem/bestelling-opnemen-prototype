@@ -1,8 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
 <link rel="import" href="../../bower_components/vaadin-text-field/vaadin-text-field.html">
 <link rel="import" href="../../bower_components/vaadin-checkbox/vaadin-checkbox.html">
 <link rel="import" href="../../bower_components/vaadin-button/vaadin-button.html">
 <link rel="import" href="../../bower_components/vaadin-dialog/vaadin-dialog.html">
+<link rel="stylesheet" href="../../bower_components/vaadin-checkbox/vaadin-checkbox-group.html">
+
 
 
 <dom-module id="gerecht-toevoegen">
@@ -11,74 +14,102 @@
       :host {
         display: block;
       }
-           
+
+      vaadin-text-field {
+        position: relative;
+        align-self: center
+      }
+
+
+      
+      .gerechtToevoegen {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .gerechtContent {
+        width: 600px;
+        height: 450px;
+        background-color: white;
+        position: relative;
+        align-items: center;
+        background:white; 
+      } 
+
+
+      .center {
+        justify-content: center;
+        align-items: center;
+      }
+
     </style>
+<vaadin-button on-click="toggleModel"> help</vaadin-button>
+<template is="dom-if" if="{{showModel}}">
 
-    
-<label for="label1">Gerecht Toevoegen:</label>
-<vaadin-text-field placeholder="Gerecht"></vaadin-text-field>
-
-
-<br><br>
-<label>Ingredienten:</label>
-<br><br>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<br>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<br>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<br>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<vaadin-checkbox >APPELS</a></vaadin-checkbox>
-<br><br>
-
-<vaadin-button>
-  Cancel
-</vaadin-button>
-
-<vaadin-button>
-  Toevoegen
-</vaadin-button>
-
-
-
-<!-- 
-<div class="popUp1">
-  <div class="modal-content">
-    <p>Bevestig het toevoegen van het gerecht</p>
-    <vaadin-button id="knop1">
-      Nee
-    </vaadin-button>
-    <vaadin-button id="knop2">
-      Ja
-    </vaadin-button>
-
-    <div class="close">+</div>
+  
+  <div class="gerechtToevoegen">
+    <div class="gerechtContent">
+      <div class="center"> 
+        
+        <h2>Gerecht toevoegen</h2>
+        
+        <label>Gerecht Toevoegen:</label>
+        <vaadin-text-field placeholder="Gerecht" value="{{gerechtNaam}}"></vaadin-text-field>
+        <br>
+        
+        <label>Beschrijving:</label>
+        <vaadin-text-field placeholder="beschrijving" value="{{beschrijving}}"></vaadin-text-field>
+        <br>
+        <label>Prijs:</label>
+        <vaadin-text-field placeholder="0.0" value="{{prijs}}"></vaadin-text-field>
+        <br>
+        
+        
+        
+        <div>
+          <label>Ingredienten:</label>
+          <vaadin-text-field placeholder="ingredient" value="{{ingredient}}"></vaadin-text-field>
+          
+          <vaadin-button raised on-click="addIngredientHandler" >+</vaadin-button>
+        </div>
+        <br>
+        <template is = "dom-repeat" items="{{ingredientLijst}}" as="ingredient">
+          [[ingredient]],
+          
+        </template>
+        
+        <br><br>
+        <div class="knoppen">
+          
+          
+          <vaadin-button raised on-click="toggleModel">
+            Cancel
+          </vaadin-button>
+          
+          <vaadin-button raised on-click="addGerechtHandler">
+            Toevoegen
+          </vaadin-button>
+        </div> 
+        
+        
+        
+      </div>
+    </div>
   </div>
-</div>
-
-<div class="popUp2">
-  <div class="modal-content">
-    <p>Weet u zeker dat u wilt afsluiten?</p>
-    <vaadin-button id="knop1">
-      Nee
-    </vaadin-button>
-    <vaadin-button id="knop2">
-      Ja
-    </vaadin-button>
-
-    <div class="close">+</div>
-  </div>
-</div> -->
-
-
+  
+</template>
+  
+  
+  
+  
+  
+  
   </template>
 
   <script>
@@ -87,12 +118,73 @@
      * @polymer
      */
     class GerechtToevoegen extends Polymer.Element {
-      static get is() { return 'gerecht-toevoegen'; }
-    }
+      static get is() {
+        return 'gerecht-toevoegen';
+      }
+      static get properties() {
+        return {
+
+          gerechtNaam: {
+            type: String,
+            value: ""
+          },
+
+          beschrijving: {
+            type: String,
+            value: ''
+          },
+
+          prijs: {
+            type: Number,
+            value: 0.0
+          },
+          ingredient:{
+            type:String,
+            value:""
+          },
+
+          ingredientLijst: {
+            type: Array,
+            value: []
+          },
+
+          showModel:{
+            type: Boolean,
+            value:false,
+          },
+        }
+      }
+      addIngredientHandler(){
+        if(this.ingredient !== '' && !this.ingredientLijst.includes(this.ingredient.toLowerCase())){
+          this.push('ingredientLijst', this.ingredient.toLowerCase());
+          this.ingredient="";
+
+        } else {
+          console.log('doe nou niet leeg jonge')
+        }
+      }
+      addGerechtHandler(){
+        console.log(this.gerechtNaam,this.beschrijving,this.prijs,this.ingredientLijst);
+
+      }
+      toggleModel(){
+        this.showModel = !this.showModel;
+
+      }
+
+
+
+        
+
+      }
+   
+
+      
+    
+
+
 
     window.customElements.define(GerechtToevoegen.is, GerechtToevoegen);
 
-    
-    
   </script>
 </dom-module>

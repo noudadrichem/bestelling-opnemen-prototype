@@ -12,7 +12,7 @@
     </style>
 
     <div class="cards-container">
-      <h1>Wordt bereidt:</h1>
+      <h1>In wachtrij:</h1>
 
       <template is="dom-repeat" items="{{gerechten}}">
         <single-card
@@ -48,9 +48,9 @@
         }
       }
 
-      listUpdated() {
-        console.log('ja toch')
-      }
+      // ready() {
+      //   console.log(this.localName + '#' + this.id + ' has local DOM initialized');
+      // }
     }
 
     window.customElements.define(CardsContainer.is, CardsContainer);

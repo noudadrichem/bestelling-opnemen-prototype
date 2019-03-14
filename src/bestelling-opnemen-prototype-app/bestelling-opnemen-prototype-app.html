@@ -1,25 +1,42 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../toevoegen-verwijderen/gerecht-toevoegen.html">
 <link rel="import" href="../toevoegen-verwijderen/gerecht-verwijderen.html">
+
+<link rel="import" href="../toevoegen-verwijderen/melding-pop.html">
 <link rel="import" href="../cards/container.html">
 
 <dom-module id="bestelling-opnemen-prototype-app">
   <template>
     <style>
+      @import '../../master.css';
+      @import '../../grid.css';
       :host {
         display: block;
       }
     </style>
+
+    <!-- <melding-pop></melding-pop> -->
+   
+   <gerecht-toevoegen></gerecht-toevoegen> 
+  <!-- <gerecht-verwijderen></gerecht-verwijderen> -->
   
-   <!-- <gerecht-toevoegen></gerecht-toevoegen> -->
-  <gerecht-verwijderen></gerecht-verwijderen>
   
 
-    <!-- <cards-container
-      gerechten="{{gerechten}}"
-      cta="Begin bereiding"
-    ></cards-container> -->
+    <div class="container">
 
+        <div class="row">
+          <div class="8 col">
+              <cards-container
+              gerechten="{{gerechten}}"
+              cta="Begin bereiding"
+              ></cards-container>
+          </div>
+          <div class="4 col">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur amet accusamus laboriosam cumque dicta nobis nisi doloribus impedit quia consectetur magni magnam nemo dignissimos alias, ex quod nesciunt, voluptas repudiandae.</div>
+        </div>
+
+
+
+    </div>
   </template>
 
   <script>
@@ -28,9 +45,15 @@
      * @polymer
      */
     class BestellingOpnemenPrototypeApp extends Polymer.Element {
+      constructor() {
+        super();
+      }
+
       static get is() {
         return 'bestelling-opnemen-prototype-app';
       }
+
+  
 
       static get properties() {
         return {
@@ -89,7 +112,6 @@
       bestellingKlaren() {
         console.log('bestellingKlaren')
       }
-
     }
 
     window.customElements.define(BestellingOpnemenPrototypeApp.is, BestellingOpnemenPrototypeApp);
