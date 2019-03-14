@@ -22,7 +22,6 @@
             gerechten="{{gerechten}}"
             cta="Begin bereiding"
             titel="Staat in de wachtrij"
-            cardFunc="{{setBestellingInBereiding}}"
           />
 
         </div>
@@ -44,7 +43,7 @@
      * @customElement
      * @polymer
      */
-
+    const isInStorage = window.localStorage.getItem('GERECHTEN');
     class WachtrijContainer extends Polymer.Element {
       constructor() {
         super();
@@ -56,7 +55,7 @@
 
       ready() {
         super.ready();
-        this.getSetLocalStorageData('GERECHTEN', this.alleGerechten)
+        // this.getSetLocalStorageData('GERECHTEN', this.totaalGerechten)
       }
 
       static get properties() {
@@ -71,12 +70,8 @@
           },
           gerechten: {
             type: Array,
-            computed: 'getBesteldeGerechten()'
+            computed: 'getGerechtenZijnBesteld()'
           },
-          alleGerechten: {
-            type: Array,
-            value: []
-          }
         }
       }
 
@@ -85,19 +80,28 @@
         console.log(gekozenGerecht)
       }
 
-      getBesteldeGerechten() {
-        return this.alleGerechten.filter(gerecht => gerecht.status === 'besteld')
-      }
-
-      getSetLocalStorageData(key, set) {
-        const isInStorage = window.localStorage.getItem(key);
-        if (isInStorage) {
-          set = JSON.parse(isInStorage);
-          this.alleGerechten = set
+      getGerechtenZijnBesteld() {
+        if(isInStorage) {
+          const gerechten = JSON.parse(window.localStorage.getItem('GERECHTEN'))
+          const isBestld = gerechten.filter(gerecht => gerecht.status === 'besteld')
+          return isBestld
         } else {
-          window.localStorage.setItem(key, JSON.stringify(set))
+          window.location.href = '/wachtrij.html'
         }
       }
+
+      // getBesteldeGerechten() {
+      //   return this.totaalGerechten.filter(gerecht => gerecht.status === 'besteld')
+      // }
+
+      // getSetLocalStorageData(key, set) {
+      //   const isInStorage = window.localStorage.getItem(key);
+      //   if (isInStorage) {
+      //     set = JSON.parse(isInStorage);
+      //   } else {
+      //     window.localStorage.setItem(key, JSON.stringify(set))
+      //   }
+      // }
     }
 
     window.customElements.define(WachtrijContainer.is, WachtrijContainer);
