@@ -1,0 +1,99 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../cards/container.html">
+
+<dom-module id="wordt-bereidt-container">
+  <template>
+    <style>
+      @import '../../master.css';
+      @import '../../grid.css';
+
+      :host {
+        display: block;
+      }
+
+    </style>
+
+    <div class="container">
+      <div class="row">
+        <div class="8 col">
+
+          <cards-container
+          gerechten="{{gerechten}}"
+          cta="Gerecht is klaar"
+          titel="Word momenteel bereidt:"
+          />
+
+        </div>
+
+        <div class="4 col">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur amet accusamus
+            laboriosam cumque dicta nobis nisi doloribus impedit quia consectetur magni magnam nemo dignissimos alias, ex
+            quod nesciunt, voluptas repudiandae.</p>
+
+            <a href="/wachtrij.html" class="btn">Bekijk bestellingen</a>
+        </div>
+      </div>
+
+    </div>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    const isInStorage = window.localStorage.getItem('GERECHTEN');
+    class WordtBreidtContainer extends Polymer.Element {
+      constructor() {
+        super();
+      }
+
+      static get is() {
+        return 'wordt-bereidt-container';
+      }
+
+      ready() {
+        super.ready();
+        // this.getSetLocalStorageData('GERECHTEN',)
+      }
+
+      static get properties() {
+        return {
+          bestellingen: {
+            type: Array,
+            value: [0, 2]
+          },
+          inBereiding: {
+            type: Array,
+            value: [2]
+          },
+          gerechten: {
+            type: Array,
+            computed: 'getGerechtenWordenBereidt()'
+          }
+        }
+      }
+
+      getGerechtenWordenBereidt() {
+        if(isInStorage) {
+          const gerechten = JSON.parse(window.localStorage.getItem('GERECHTEN'))
+          const inBereiding = gerechten.filter(gerecht => gerecht.status === 'wordt bereidt')
+          return inBereiding
+        } else {
+          window.location.href = '/wachtrij.html'
+        }
+      }
+
+      getSetLocalStorageData(key, set) {
+        if (isInStorage) {
+          set = JSON.parse(isInStorage);
+        } else {
+          window.localStorage.setItem(key, JSON.stringify(set))
+        }
+      }
+    }
+
+    window.customElements.define(WordtBreidtContainer.is, WordtBreidtContainer);
+
+  </script>
+</dom-module>
