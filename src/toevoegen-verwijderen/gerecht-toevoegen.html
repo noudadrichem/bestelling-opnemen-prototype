@@ -94,29 +94,29 @@
 
               <div class="even-ruimte-tussen">
                 <label>Gerecht Toevoegen:</label>
-                <vaadin-text-field placeholder="Gerecht" value="{{gerechtNaam}}"></vaadin-text-field>
+                <vaadin-text-field clear-button-visible placeholder="Gerecht" value="{{gerechtNaam}}"></vaadin-text-field>
               </div>
 
               <div class="even-ruimte-tussen">
                 <label>Beschrijving:</label>
-                <vaadin-text-field placeholder="beschrijving" value="{{beschrijving}}"></vaadin-text-field>
+                <vaadin-text-field clear-button-visible placeholder="beschrijving" value="{{beschrijving}}"></vaadin-text-field>
               </div>
 
               <div class="even-ruimte-tussen">
                 <label>Label:</label>
-                <vaadin-text-field placeholder="beschrijving" value="{{label}}"></vaadin-text-field>
+                <vaadin-text-field clear-button-visible placeholder="beschrijving" value="{{label}}"></vaadin-text-field>
               </div>
 
               <div class="even-ruimte-tussen">
                 <label>Prijs:</label>
-                <vaadin-number-field value="{{prijs}}">
+                <vaadin-number-field   clear-button-visible value="{{prijs}}"><div  slot="prefix">€</div>
                   </vaadin-text-field>
               </div>
 
               <div class="even-ruimte-tussen">
                 <label>Ingredienten:</label>
                 <span>
-                  <vaadin-text-field placeholder="ingredient" value="{{ingredient}}"></vaadin-text-field>
+                  <vaadin-text-field clear-button-visible placeholder="ingredient" value="{{ingredient}}"></vaadin-text-field>
                   <vaadin-button raised on-click="addIngredientHandler">+</vaadin-button>
                 </span>
               </div>
@@ -170,7 +170,7 @@
           },
           prijs: {
             type: Number,
-            value: 0.0
+            value: 0
           },
           ingredient: {
             type: String,
@@ -207,8 +207,14 @@
           status: '',
         }
         console.log(this.abc)
+        
 
-        this.abc(nieuwGerecht)
+        if (this.gerechtNaam !== '' && parseInt(this.prijs) !== 0 && this.prijs !== '') {
+          this.showModel = !this.showModel;  
+          this.abc(nieuwGerecht)
+          
+
+        }
       }
 
       toggleModel() {
