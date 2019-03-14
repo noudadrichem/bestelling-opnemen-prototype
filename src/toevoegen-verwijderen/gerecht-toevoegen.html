@@ -1,12 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
 <link rel="import" href="../../bower_components/vaadin-text-field/vaadin-text-field.html">
-<link rel="import" href="../../bower_components/vaadin-checkbox/vaadin-checkbox.html">
+<link rel="import" href="../../bower_components/vaadin-text-field/vaadin-number-field.html">
 <link rel="import" href="../../bower_components/vaadin-button/vaadin-button.html">
 <link rel="import" href="../../bower_components/vaadin-dialog/vaadin-dialog.html">
-<link rel="stylesheet" href="../../bower_components/vaadin-checkbox/vaadin-checkbox-group.html">
-
-
 
 <dom-module id="gerecht-toevoegen">
   <template>
@@ -20,14 +17,13 @@
         align-self: center
       }
 
-
-      
       .gerechtToevoegen {
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.7);
-        position: absolute;
+        position: fixed;
         top: 0;
+        left: 0;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -39,77 +35,114 @@
         background-color: white;
         position: relative;
         align-items: center;
-        background:white; 
-      } 
+        background: white;
+      }
 
+      .gerechtContent h2 {
+        text-align: center;
+        margin-bottom: 16px;
+      }
 
-      .center {
-        justify-content: center;
-        align-items: center;
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 80%;
+        margin: 0 auto;
+      }
+
+      .input-container .even-ruimte-tussen {
+        display: inline-flex;
+        justify-content: space-between;
+      }
+
+      .knoppen {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+      }
+
+      .kruisje {
+        position: absolute;
+        top: 8px;
+        right: 8px;
       }
 
     </style>
-<vaadin-button on-click="toggleModel"> help</vaadin-button>
-<template is="dom-if" if="{{showModel}}">
 
-  
-  <div class="gerechtToevoegen">
-    <div class="gerechtContent">
-      <div class="center"> 
-        
-        <h2>Gerecht toevoegen</h2>
-        
-        <label>Gerecht Toevoegen:</label>
-        <vaadin-text-field placeholder="Gerecht" value="{{gerechtNaam}}"></vaadin-text-field>
-        <br>
-        
-        <label>Beschrijving:</label>
-        <vaadin-text-field placeholder="beschrijving" value="{{beschrijving}}"></vaadin-text-field>
-        <br>
-        <label>Prijs:</label>
-        <vaadin-text-field placeholder="0.0" value="{{prijs}}"></vaadin-text-field>
-        <br>
-        
-        
-        
-        <div>
-          <label>Ingredienten:</label>
-          <vaadin-text-field placeholder="ingredient" value="{{ingredient}}"></vaadin-text-field>
-          
-          <vaadin-button raised on-click="addIngredientHandler" >+</vaadin-button>
+    <vaadin-button on-click="toggleModel">Gerecht toevoegen</vaadin-button>
+
+    <template is="dom-if" if="{{showModel}}">
+
+
+      <div class="gerechtToevoegen">
+
+        <div class="gerechtContent">
+          <div class="center">
+            <span on-click="toggleModel" class="kruisje">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff0000"
+                stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+
+            </span>
+
+            <h2>Gerecht toevoegen</h2>
+
+            <div class="input-container">
+
+              <div class="even-ruimte-tussen">
+                <label>Gerecht Toevoegen:</label>
+                <vaadin-text-field placeholder="Gerecht" value="{{gerechtNaam}}"></vaadin-text-field>
+              </div>
+
+              <div class="even-ruimte-tussen">
+                <label>Beschrijving:</label>
+                <vaadin-text-field placeholder="beschrijving" value="{{beschrijving}}"></vaadin-text-field>
+              </div>
+
+              <div class="even-ruimte-tussen">
+                <label>Label:</label>
+                <vaadin-text-field placeholder="beschrijving" value="{{label}}"></vaadin-text-field>
+              </div>
+
+              <div class="even-ruimte-tussen">
+                <label>Prijs:</label>
+                <vaadin-number-field value="{{prijs}}">
+                  </vaadin-text-field>
+              </div>
+
+              <div class="even-ruimte-tussen">
+                <label>Ingredienten:</label>
+                <span>
+                  <vaadin-text-field placeholder="ingredient" value="{{ingredient}}"></vaadin-text-field>
+                  <vaadin-button raised on-click="addIngredientHandler">+</vaadin-button>
+                </span>
+              </div>
+
+              <div>
+                <template is="dom-repeat" items="{{ingredientLijst}}" as="ingredient">
+                  [[ingredient]],
+                </template>
+              </div>
+
+              <div class="knoppen">
+                <vaadin-button raised on-click="toggleModel">
+                  Cancel
+                </vaadin-button>
+
+                <vaadin-button raised on-click="addGerechtHandler">
+                  Toevoegen
+                </vaadin-button>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <br>
-        <template is = "dom-repeat" items="{{ingredientLijst}}" as="ingredient">
-          [[ingredient]],
-          
-        </template>
-        
-        <br><br>
-        <div class="knoppen">
-          
-          
-          <vaadin-button raised on-click="toggleModel">
-            Cancel
-          </vaadin-button>
-          
-          <vaadin-button raised on-click="addGerechtHandler">
-            Toevoegen
-          </vaadin-button>
-        </div> 
-        
-        
-        
       </div>
-    </div>
-  </div>
-  
-</template>
-  
-  
-  
-  
-  
-  
+
+    </template>
   </template>
 
   <script>
@@ -123,66 +156,65 @@
       }
       static get properties() {
         return {
-
           gerechtNaam: {
             type: String,
             value: ""
           },
-
           beschrijving: {
             type: String,
             value: ''
           },
-
+          label: {
+            type: String,
+            value: ''
+          },
           prijs: {
             type: Number,
             value: 0.0
           },
-          ingredient:{
-            type:String,
-            value:""
+          ingredient: {
+            type: String,
+            value: ""
           },
-
           ingredientLijst: {
             type: Array,
             value: []
           },
-
-          showModel:{
+          showModel: {
             type: Boolean,
-            value:false,
+            value: false,
           },
+          abc: {
+            type: Function,
+            notify: true,
+          }
         }
       }
-      addIngredientHandler(){
-        if(this.ingredient !== '' && !this.ingredientLijst.includes(this.ingredient.toLowerCase())){
+      addIngredientHandler() {
+        if (this.ingredient !== '' && !this.ingredientLijst.includes(this.ingredient.toLowerCase())) {
           this.push('ingredientLijst', this.ingredient.toLowerCase());
-          this.ingredient="";
-
-        } else {
-          console.log('doe nou niet leeg jonge')
+          this.ingredient = "";
         }
       }
-      addGerechtHandler(){
-        console.log(this.gerechtNaam,this.beschrijving,this.prijs,this.ingredientLijst);
 
+      addGerechtHandler() {
+        const nieuwGerecht = {
+          naam: this.gerechtNaam,
+          beschrijving: this.beschrijving,
+          prijs: this.prijs,
+          ingredienten: this.ingredientLijst,
+          label: this.label,
+          status: '',
+        }
+        console.log(this.abc)
+
+        this.abc(nieuwGerecht)
       }
-      toggleModel(){
+
+      toggleModel() {
         this.showModel = !this.showModel;
-
       }
-
-
-
-        
-
-      }
-   
-
-      
-    
-
-
+    }
 
     window.customElements.define(GerechtToevoegen.is, GerechtToevoegen);
 
