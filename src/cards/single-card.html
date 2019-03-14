@@ -29,9 +29,11 @@
       </div>
 
       <div>
-        <span>00:11:13</span>
+        <!-- <span>00:11:13</span> -->
+        <!-- <label>GROOT</label> -->
+
         <span>
-          <button>{{ cta }}</button>
+          <button class="btn secondary">{{ cta }}</button>
         </span>
       </div>
     </div>
@@ -48,7 +50,6 @@
         super();
       }
 
-
       static get is() {
         return 'single-card';
       }
@@ -62,6 +63,10 @@
           cta: {
             type: String,
             notify: true,
+          },
+          cardFunc: {
+            type: Function,
+            notify: true
           }
         }
       }

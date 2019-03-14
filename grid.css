@@ -51,11 +51,6 @@ pre {
   border: solid #eee
 }
 
-.btn:hover,
-a:hover {
-  opacity: .6
-}
-
 .c {
   max-width: 60em;
   padding: 1em;
@@ -107,14 +102,4 @@ th {
   padding: 1em;
   text-align: left;
   border-bottom: solid #eee
-}
-
-.btn {
-  cursor: pointer;
-  padding: 1em;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  background: #fff;
-  border: solid;
-  font: .7em nunito
 }

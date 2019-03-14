@@ -1,0 +1,132 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../cards/container.html">
+
+<dom-module id="wachtrij-container">
+  <template>
+    <style>
+      @import '../../master.css';
+      @import '../../grid.css';
+
+      :host {
+        display: block;
+      }
+
+    </style>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="8 col">
+
+          <cards-container
+            gerechten="{{gerechten}}"
+            cta="Begin bereiding"
+            titel="Staat in de wachtrij"
+            cardFunc="{{setBestellingInBereiding}}"
+          />
+
+        </div>
+
+        <div class="4 col">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur amet accusamus
+          laboriosam cumque dicta nobis nisi doloribus impedit quia consectetur magni magnam nemo dignissimos alias, ex
+          quod nesciunt, voluptas repudiandae.</p>
+
+          <a href="/besteld.html" class="btn">Bekijk bereidingen</a>
+        </div>
+      </div>
+
+    </div>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+
+    class WachtrijContainer extends Polymer.Element {
+      constructor() {
+        super();
+      }
+
+      static get is() {
+        return 'wachtrij-container';
+      }
+
+      ready() {
+        super.ready();
+        this.getSetLocalStorageData('GERECHTEN', this.alleGerechten)
+      }
+
+      static get properties() {
+        return {
+          bestellingen: {
+            type: Array,
+            value: [0, 2]
+          },
+          inBereiding: {
+            type: Array,
+            value: [2]
+          },
+          gerechten: {
+            type: Array,
+            computed: 'getBesteldeGerechten()'
+          },
+          alleGerechten: {
+            type: Array,
+            value: [{
+                id: 0,
+                naam: 'Gerecht 1',
+                beschrijving: 'Dit is een beschrijvin van gerecht 1',
+                prijs: 4.95,
+                ingredienten: ['appel', 'peer'],
+                label: 'Groot',
+                status: 'wordt bereidt' // een van ['', besteld', 'wordt bereidt', 'is bereidt']
+              },
+              {
+                id: 1,
+                naam: 'Gerecht 2',
+                beschrijving: 'Dit is een beschrijvin van gerecht 2',
+                prijs: 12.50,
+                ingredienten: ['moetje', 'hebben'],
+                label: 'Groot',
+                status: 'besteld' // een van ['besteld', 'wordt bereidt', 'is bereidt']
+              },
+              {
+                id: 2,
+                naam: 'Gerecht 3',
+                beschrijving: 'Dit is een beschrijvin van gerecht 3',
+                prijs: 14.95,
+                ingredienten: ['banaan', 'ei'],
+                label: 'Klein',
+                status: 'besteld' // een van ['besteld', 'wordt bereidt', 'is bereidt']
+              },
+            ]
+          }
+        }
+      }
+
+      setBestellingInBereiding(id) {
+        const gekozenGerecht = this.alleGerechten.find(g => g.id);
+        console.log(gekozenGerecht)
+      }
+
+      getBesteldeGerechten() {
+        return this.alleGerechten.filter(gerecht => gerecht.status === 'besteld')
+      }
+
+      getSetLocalStorageData(key, set) {
+        const isInStorage = window.localStorage.getItem(key);
+        if (isInStorage) {
+          set = JSON.parse(isInStorage);
+        } else {
+          window.localStorage.setItem(key, JSON.stringify(set))
+        }
+      }
+    }
+
+    window.customElements.define(WachtrijContainer.is, WachtrijContainer);
+
+  </script>
+</dom-module>

@@ -12,12 +12,13 @@
     </style>
 
     <div class="cards-container">
-      <h1>In wachtrij:</h1>
+      <h1>{{ titel }}</h1>
 
       <template is="dom-repeat" items="{{gerechten}}">
         <single-card
           item="{{item}}"
           cta="{{cta}}"
+          cardFunc="{{cardFunc}}"
         ></single-card>
       </template>
 
@@ -35,6 +36,11 @@
         return 'cards-container';
       }
 
+      ready() {
+        super.ready();
+        console.log('card container is ready')
+      }
+
       static get properties() {
         return {
           gerechten: {
@@ -44,6 +50,14 @@
           cta: {
             type: String,
             notify: true,
+          },
+          titel: {
+            type: String,
+            notify: true,
+          },
+          cardFunc: {
+            type: Function,
+            notify: true
           }
         }
       }
