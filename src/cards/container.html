@@ -35,6 +35,11 @@
         return 'cards-container';
       }
 
+      ready() {
+        super.ready();
+        console.log('card container is ready')
+      }
+
       static get properties() {
         return {
           gerechten: {
