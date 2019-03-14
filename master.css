@@ -14,3 +14,40 @@
   padding: 0 24px;
   margin: 0 auto;
 }
+
+.btn {
+  border: 0;
+  outline: none;
+  padding: 16px;
+  background: #007aff;
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 2px 8px 0 rgba(0,122,255,.33);
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  transition: 200ms;
+}
+
+.btn:hover {
+  background: rgba(0, 122, 255, .8)
+}
+
+.btn.secondary {
+  padding: 8px;
+  height: auto;
+  width: auto;
+  font-size: 10px;
+  text-align: center;
+  color: #7a848f;
+  background-color: #fbfbfd;
+  box-shadow: 0 2px 8px 0 hsla(0,0%,50.2%,.3);
+}
+.btn.secondary:hover {
+  background-color: rgba(251, 251, 253, .8);
+}

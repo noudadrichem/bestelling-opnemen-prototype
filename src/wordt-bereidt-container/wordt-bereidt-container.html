@@ -14,15 +14,24 @@
     </style>
 
     <div class="container">
-      <pre>{{ gerechten }}</pre>
       <div class="row">
         <div class="8 col">
-          <cards-container gerechten="{{gerechten}}" cta="Is klaar"></cards-container>
+
+          <cards-container
+          gerechten="{{gerechten}}"
+          cta="Gerecht is klaar"
+          titel="Word momenteel bereidt:"
+          />
+
         </div>
 
-        <div class="4 col">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur amet accusamus
-          laboriosam cumque dicta nobis nisi doloribus impedit quia consectetur magni magnam nemo dignissimos alias, ex
-          quod nesciunt, voluptas repudiandae.</div>
+        <div class="4 col">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur amet accusamus
+            laboriosam cumque dicta nobis nisi doloribus impedit quia consectetur magni magnam nemo dignissimos alias, ex
+            quod nesciunt, voluptas repudiandae.</p>
+
+            <a href="/wachtrij.html" class="btn">Bekijk bestellingen</a>
+        </div>
       </div>
 
     </div>
@@ -73,7 +82,6 @@
         } else {
           window.location.href = '/wachtrij.html'
         }
-
       }
 
       getSetLocalStorageData(key, set) {
