@@ -13,12 +13,22 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 12px;
-        box-shadow: 0 5px 10px 0 #eeeef3;
+        box-shadow: 0 5px 10px 0 rgba(238, 238, 243, .3);
       }
 
       .single-card div {
         display: flex;
         flex-direction: column;
+      }
+
+      .single-card .label {
+        font-size: 10px;
+        padding: 4px;
+        border-radius: 4px;
+        background-color: #BFDBF9;
+        color: #002E61;
+        text-align: center;
+        margin-bottom: 12px;
       }
     </style>
 
@@ -30,10 +40,10 @@
 
       <div>
         <!-- <span>00:11:13</span> -->
-        <!-- <label>GROOT</label> -->
+        <label class="label">{{ item.label }}</label>
 
         <span>
-          <button class="btn secondary">{{ cta }}</button>
+          <button class="btn secondary" on-click="changeGerechtStatus" data-args="wordt bereidt">{{ cta }}</button>
         </span>
       </div>
     </div>
@@ -57,18 +67,49 @@
       static get properties() {
         return {
           item: {
-            type: Array,
+            type: Object,
             notify: true
           },
           cta: {
             type: String,
             notify: true,
           },
-          cardFunc: {
+          handler: {
             type: Function,
             notify: true
           }
         }
+      }
+
+      changeGerechtStatus(e) {
+        let newStatus = ''
+        if(window.location.pathname === '/wachtrij.html') {
+          newStatus = 'wordt bereidt'
+        } else if(window.location.pathname === '/besteld.html') {
+          newStatus = ''
+        } else if(window.location.pathname === '/') {
+          newStatus = 'besteld'
+        }
+        console.log('new status', newStatus)
+        console.log('change ', this.item.id)
+        const oudeGerechten = JSON.parse(localStorage.getItem('GERECHTEN'))
+        const geselecteerdGerechten = oudeGerechten.map(g => {
+
+          if(g.id === this.item.id) {
+            return {
+              ...g,
+              status: newStatus
+            }
+          } else {
+            return g
+          }
+        })
+
+        localStorage.setItem('GERECHTEN', JSON.stringify(geselecteerdGerechten))
+        window.location.reload();
+
+        console.log({geselecteerdGerechten})
+
       }
     }
 

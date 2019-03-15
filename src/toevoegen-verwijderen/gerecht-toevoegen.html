@@ -67,6 +67,43 @@
         right: 8px;
       }
 
+      .melding-outer {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .melding-inner {
+        width: 250px;
+        height: 150px;
+        background-color: white;
+        position: relative;
+        align-items: center;
+        background: white;
+      }
+
+      .melding-inner p {
+
+        text-align: center;
+        margin-bottom: 16px;
+
+      }
+
+      .melding-popup {
+        display: flex;
+        flex-direction: column;
+        padding: 25px;
+        justify-content: center;
+        margin-bottom: 16px;
+
+      }
+
     </style>
 
     <vaadin-button on-click="toggleModel">Gerecht toevoegen</vaadin-button>
@@ -109,7 +146,8 @@
 
               <div class="even-ruimte-tussen">
                 <label>Prijs:</label>
-                <vaadin-number-field   clear-button-visible value="{{prijs}}"><div  slot="prefix">€</div>
+                <vaadin-number-field clear-button-visible value="{{prijs}}">
+                  <div slot="prefix">€</div>
                   </vaadin-text-field>
               </div>
 
@@ -138,11 +176,31 @@
               </div>
             </div>
 
+
+
+
+
+
+
           </div>
         </div>
       </div>
 
     </template>
+
+    <template is="dom-if" if="{{showModel2}}">
+      <div class="melding-outer">
+        <div class="melding-inner">
+          <div class="melding-popup">
+
+            <p>Gerecht is toegevoegd</p>
+            <vaadin-button class="knopje" raised on-click="toggleModel2"> oke
+            </vaadin-button>
+          </div>
+        </div>
+      </div>
+    </template>
+
   </template>
 
   <script>
@@ -184,6 +242,10 @@
             type: Boolean,
             value: false,
           },
+          showModel2: {
+            type: Boolean,
+            value: false,
+          },
           abc: {
             type: Function,
             notify: true,
@@ -206,19 +268,27 @@
           label: this.label,
           status: '',
         }
-        console.log(this.abc)
-        
 
-        if (this.gerechtNaam !== '' && parseInt(this.prijs) !== 0 && this.prijs !== '') {
-          this.showModel = !this.showModel;  
+        if (this.gerechtNaam !== '' && parseInt(this.prijs) !== 0 && this.prijs !== '' && this.ingredientLijst.length !== 0) {
+          this.showModel2 = !this.showModel2;
+          this.showModel = !this.showModel;
           this.abc(nieuwGerecht)
           
-
         }
       }
 
       toggleModel() {
         this.showModel = !this.showModel;
+        this.gerechtNaam = '';
+          this.beschrijving = '';
+          this.label = '';
+          this.ingredient = '';
+          this.prijs = 0;
+          this.ingredientLijst = [];
+      }
+
+      toggleModel2() {
+        this.showModel2 = !this.showModel2;
       }
     }
 
