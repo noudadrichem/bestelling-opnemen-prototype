@@ -20,6 +20,16 @@
         display: flex;
         flex-direction: column;
       }
+
+      .single-card .label {
+        font-size: 10px;
+        padding: 4px;
+        border-radius: 4px;
+        background-color: #BFDBF9;
+        color: #002E61;
+        text-align: center;
+        margin-bottom: 12px;
+      }
     </style>
 
     <div class="single-card">
@@ -30,7 +40,7 @@
 
       <div>
         <!-- <span>00:11:13</span> -->
-        <!-- <label>GROOT</label> -->
+        <label class="label">{{ item.label }}</label>
 
         <span>
           <button class="btn secondary" on-click="changeGerechtStatus" data-args="wordt bereidt">{{ cta }}</button>
