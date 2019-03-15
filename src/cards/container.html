@@ -18,7 +18,7 @@
         <single-card
           item="{{item}}"
           cta="{{cta}}"
-          cardFunc="{{cardFunc}}"
+          handler="{{gerechtHandler}}"
         ></single-card>
       </template>
 
@@ -32,13 +32,11 @@
      * @polymer
      */
     class CardsContainer extends Polymer.Element {
+      constructor() {
+        super()
+      }
       static get is() {
         return 'cards-container';
-      }
-
-      ready() {
-        super.ready();
-        console.log('card container is ready')
       }
 
       static get properties() {
@@ -55,16 +53,12 @@
             type: String,
             notify: true,
           },
-          cardFunc: {
+          gerechtHandler: {
             type: Function,
             notify: true
           }
         }
       }
-
-      // ready() {
-      //   console.log(this.localName + '#' + this.id + ' has local DOM initialized');
-      // }
     }
 
     window.customElements.define(CardsContainer.is, CardsContainer);
