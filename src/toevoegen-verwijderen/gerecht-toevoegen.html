@@ -166,7 +166,7 @@
               </div>
 
               <div class="knoppen">
-                <vaadin-button raised on-click="toggleModel2">
+                <vaadin-button raised on-click="toggleModel">
                   Cancel
                 </vaadin-button>
 
@@ -268,26 +268,23 @@
           label: this.label,
           status: '',
         }
-        console.log(this.abc)
 
-
-        if (this.gerechtNaam !== '' && parseInt(this.prijs) !== 0 && this.prijs !== '') {
+        if (this.gerechtNaam !== '' && parseInt(this.prijs) !== 0 && this.prijs !== '' && this.ingredientLijst.length !== 0) {
           this.showModel2 = !this.showModel2;
           this.showModel = !this.showModel;
           this.abc(nieuwGerecht)
-          this.gerechtNaam = '';
-          this.beschrijving = '';
-          this.label = '';
-          this.ingredient = '';
-          this.prijs = 0;
-          this.ingredientLijst = [];
-
-
+          
         }
       }
 
       toggleModel() {
         this.showModel = !this.showModel;
+        this.gerechtNaam = '';
+          this.beschrijving = '';
+          this.label = '';
+          this.ingredient = '';
+          this.prijs = 0;
+          this.ingredientLijst = [];
       }
 
       toggleModel2() {
