@@ -102,7 +102,10 @@
         <label class="label">{{ item.label }}</label>
 
         <span>
-          <button class="btn secondary" on-click="toggleModel" data-args="wordt bereidt">Delete</button>
+          <template is="dom-if" if={{showModel2}}>
+            <button class="btn secondary" on-click="toggleModel" data-args="wordt bereidt">Delete</button>
+          </template>
+
           <button class="btn secondary" on-click="changeGerechtStatus" data-args="wordt bereidt">{{ cta }}</button>
         </span>
       </div>
@@ -162,6 +165,10 @@
           showModel: {
             type: Boolean,
             value: false,
+          },
+          showModel2: {
+            type: Boolean,
+            value: true,
           },
         }
       }
