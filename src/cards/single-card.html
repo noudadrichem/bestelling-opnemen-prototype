@@ -1,9 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/vaadin-button/vaadin-button.html">
 
 <dom-module id="single-card">
   <template>
     <style>
       @import '../../master.css';
+
     </style>
     <style>
       .single-card {
@@ -21,6 +23,11 @@
         flex-direction: column;
       }
 
+      .single-card span {
+        display: flex;
+        flex-direction: row;
+      }
+
       .single-card .label {
         font-size: 10px;
         padding: 4px;
@@ -30,6 +37,58 @@
         text-align: center;
         margin-bottom: 12px;
       }
+
+      .btn.secondary {
+        margin-left: 5px;
+      }
+
+      .melding-outer {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .melding-inner {
+        width: 250px;
+        height: 125px;
+        background-color: white;
+        position: relative;
+        align-items: center;
+        background: white;
+      }
+
+      .melding-inner p {
+
+        text-align: center;
+        margin-bottom: 16px;
+
+      }
+
+      .melding-popup {
+        display: flex;
+        flex-direction: column;
+        padding: 25px;
+        justify-content: center;
+        margin-bottom: 16px;
+
+      }
+
+      .melding-popup span{
+        display: flex;
+        align-self: center;
+      }
+      .knopje{
+        display: flex;
+        margin-left:10px;
+        margin-right: 10px;
+      }
+
     </style>
 
     <div class="single-card">
@@ -43,10 +102,31 @@
         <label class="label">{{ item.label }}</label>
 
         <span>
+          <template is="dom-if" if={{showModel2}}>
+            <button class="btn secondary" on-click="toggleModel" data-args="wordt bereidt">Delete</button>
+          </template>
+
           <button class="btn secondary" on-click="changeGerechtStatus" data-args="wordt bereidt">{{ cta }}</button>
         </span>
       </div>
     </div>
+
+
+    <template is="dom-if" if="{{showModel}}">
+      <div class="melding-outer">
+        <div class="melding-inner">
+          <div class="melding-popup">
+
+            <p>Gerecht Verwijderen?</p>
+              <span>
+              <vaadin-button class="knopje" on-click="toggleModel">nee</vaadin-button>
+              <vaadin-button class="knopje" on-click="toggleModel2">ja</vaadin-button>
+            </span>
+
+          </div>
+        </div>
+      </div>
+    </template>
 
   </template>
 
@@ -77,17 +157,29 @@
           handler: {
             type: Function,
             notify: true
-          }
+          },
+          index: {
+            type: Number,
+            notify: true
+          },
+          showModel: {
+            type: Boolean,
+            value: false,
+          },
+          showModel2: {
+            type: Boolean,
+            value: true,
+          },
         }
       }
 
       changeGerechtStatus(e) {
         let newStatus = ''
-        if(window.location.pathname === '/wachtrij.html') {
+        if (window.location.pathname === '/wachtrij.html') {
           newStatus = 'wordt bereidt'
-        } else if(window.location.pathname === '/besteld.html') {
+        } else if (window.location.pathname === '/besteld.html') {
           newStatus = ''
-        } else if(window.location.pathname === '/') {
+        } else if (window.location.pathname === '/') {
           newStatus = 'besteld'
         }
         console.log('new status', newStatus)
@@ -95,7 +187,7 @@
         const oudeGerechten = JSON.parse(localStorage.getItem('GERECHTEN'))
         const geselecteerdGerechten = oudeGerechten.map(g => {
 
-          if(g.id === this.item.id) {
+          if (g.id === this.item.id) {
             return {
               ...g,
               status: newStatus
@@ -108,11 +200,34 @@
         localStorage.setItem('GERECHTEN', JSON.stringify(geselecteerdGerechten))
         window.location.reload();
 
-        console.log({geselecteerdGerechten})
-
+        console.log({
+          geselecteerdGerechten
+        })
       }
+      delete() {
+        var oudeGerechten = localStorage.getItem('GERECHTEN');
+        oudeGerechten = JSON.parse(oudeGerechten);
+        oudeGerechten.splice(this.index, 1);
+        localStorage.setItem('GERECHTEN', JSON.stringify(oudeGerechten))
+        window.location.reload();
+        console.log({
+          oudeGerechten
+        })
+      }
+
+      toggleModel() {
+        this.showModel = !this.showModel;
+      }
+
+      toggleModel2() {
+        this.showModel = !this.showModel;
+        this.delete();
+      }
+
+
     }
 
     window.customElements.define(SingleCard.is, SingleCard);
+
   </script>
 </dom-module>
