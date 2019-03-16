@@ -89,17 +89,17 @@
                 ingredienten: ['appel', 'peer'],
                 label: 'Groot',
                 status: 'wordt bereidt', // een van ['', besteld', 'wordt bereidt', 'is bereidt']
-                beschikbaarheid: true,
+                beschikbaarheid: false,
               },
               {
                 id: 1,
                 naam: 'Gerecht 2',
                 beschrijving: 'Dit is een beschrijvin van gerecht 2',
                 prijs: 12.50,
-                ingredienten: ['moetje', 'hebben'],
+                ingredienten: ['citroen', 'perzik'],
                 label: 'Groot',
                 status: ' ', // een van ['besteld', 'wordt bereidt', 'is bereidt']
-                beschikbaarheid: true,
+                beschikbaarheid: false,
               },
               {
                 id: 2,
@@ -109,7 +109,7 @@
                 ingredienten: ['banaan', 'ei', 'kaas'],
                 label: 'Klein',
                 status: 'besteld', // een van ['besteld', 'wordt bereidt', 'is bereidt']
-                beschikbaarheid: true,
+                beschikbaarheid: false,
               },
             ]
           },
@@ -118,8 +118,9 @@
             value: {
               appel: true,
               kaas: true,
-              Zalm: false,
-              banaan: true
+              Zalm: true,
+              banaan: true,
+              peer: true,
             }
           } 
         }
@@ -129,17 +130,24 @@
         for (var i=0; i < this.alleGerechten.length; i++) {
               var gerecht = this.alleGerechten[i]
                 console.log(gerecht)
+
              for (var g=0; g < gerecht.ingredienten.length; g++) {
-              var ingredient = gerecht.ingredienten[g]
+              var ingredient = gerecht.ingredienten[g];
+
                 if (Object.keys(this.beschikbaarIngrediënten).includes(ingredient)) {
                   console.log(gerecht.naam, 'Ja heeft: ', ingredient)
+                  status = true;
                 } else {
-                  console.log(gerecht.naam, 'Nee heeft: ', ingredient)
+                  status = false;
+                  console.log(gerecht.naam, 'Nee heeft geen: ', ingredient)
+                  break;
                 }
-             }
+                console.log(status)
+                gerecht.beschikbaarheid = status;
             }
-             
-       }
+            
+        }      
+      }
 
       
 
