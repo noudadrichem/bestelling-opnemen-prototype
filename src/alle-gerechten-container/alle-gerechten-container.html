@@ -127,6 +127,7 @@
       }
 
       ingrediëntenCheck() {
+        var staat = status;
         for (var i=0; i < this.alleGerechten.length; i++) {
               var gerecht = this.alleGerechten[i]
                 console.log(gerecht)
@@ -136,14 +137,20 @@
 
                 if (Object.keys(this.beschikbaarIngrediënten).includes(ingredient)) {
                   console.log(gerecht.naam, 'Ja heeft: ', ingredient)
-                  status = true;
+                  staat = true;
                 } else {
-                  status = false;
+                  staat = false;
                   console.log(gerecht.naam, 'Nee heeft geen: ', ingredient)
                   break;
                 }
-                console.log(status)
-                gerecht.beschikbaarheid = status;
+                console.log(staat)
+                
+            }
+
+            if (staat) {
+              gerecht.beschikbaarheid = 'Beschikbaar';
+            } else {
+              gerecht.beschikbaarheid = 'Niet beschikbaar';
             }
             
         }      
