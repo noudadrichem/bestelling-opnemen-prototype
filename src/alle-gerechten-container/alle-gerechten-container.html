@@ -123,7 +123,7 @@
               banaan: true,
               peer: true,
             }
-          } 
+          }
         }
       }
 
@@ -145,7 +145,7 @@
                   break;
                 }
                 console.log(staat)
-                
+
             }
 
             if (staat) {
@@ -153,11 +153,11 @@
             } else {
               gerecht.beschikbaarheid = 'Niet beschikbaar';
             }
-            
-        }      
+
+        }
       }
 
-      
+
 
       addNewGerechtObjectToList(nieuwGerecht) {
         const toeTeVoegen = {
@@ -175,6 +175,7 @@
 
         console.log(this.alleGerechten)
         this.setLocalStorageData('GERECHTEN', this.alleGerechten)
+        this.ingrediëntenCheck();
       }
 
       setLocalStorageData(key, set) {
