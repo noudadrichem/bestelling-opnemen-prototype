@@ -1,62 +1,65 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
+<dom-module id="status_Gerecht">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
 
-    <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+      .article {
+        display: block;
+        background-color: #fff;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        text-align: center;
+        width: 200px;
+        height: 110px;
+        margin: 10px;
+      }
 
-    <dom-module id="status_Gerecht">
-      <template>
-        <style>
-          :host {
-            display: block;
-          }
-          .article{
-            display:block;     
-            background-color: #fff;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);     
-            text-align: center;
-            width: 200px; 
-            height: 110px;          
-            margin:10px;
-          }
-          .container {
-            float: left;
-          }
-          #h2 {
-            text-align: center;
-            margin: 5px;
-          }
-          paper-input {
-            width: 100px;
-            display: inline-block;
-          }
+      .container {
+        float: left;
+      }
 
-        </style>
+      #h2 {
+        text-align: center;
+        margin: 5px;
+      }
 
-      <div class="container">
-        <div class="article">
-          <paper-input class="tekst"></paper-input>
-          <paper-button>Zoek</paper-button>
-          <p id="h2"><b>Status: </b> [[status]]</p>
-        </div>
+      paper-input {
+        width: 100px;
+        display: inline-block;
+      }
+
+    </style>
+
+    <div class="container">
+      <div class="article">
+        <paper-input class="tekst"></paper-input>
+        <paper-button>Zoek</paper-button>
+        <p id="h2"><b>Status: </b> [[status]]</p>
       </div>
+    </div>
     `;
-  }
-
-  <script>
-    class StatusGerechtenApp extends Polymer.Element {
-      static get properties() {
-        return {
-          btn: {
-            type: String,
-            value: 'More'
-          },
-          status: {
-            type: String,
-            value: 'Beschikbaar'
-          }
-        };
     }
-}
 
-    window.customElements.define('status-Gerechten', MyArticle);
-  </script>
+    <script>
+      class StatusGerechtenApp extends Polymer.Element {
+        static get properties() {
+          return {
+            btn: {
+              type: String,
+              value: 'More'
+            },
+            status: {
+              type: String,
+              value: 'Beschikbaar'
+            }
+          };
+        }
+      }
+
+      window.customElements.define('status-Gerechten', MyArticle);
+
+    </script>
 </dom-module>
