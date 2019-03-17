@@ -141,7 +141,7 @@
 
               <div class="even-ruimte-tussen">
                 <label>Label:</label>
-                <vaadin-text-field clear-button-visible placeholder="beschrijving" value="{{label}}"></vaadin-text-field>
+                <vaadin-text-field clear-button-visible placeholder="Groot of Klein" value="{{label}}"></vaadin-text-field>
               </div>
 
               <div class="even-ruimte-tussen">
@@ -249,6 +249,10 @@
           abc: {
             type: Function,
             notify: true,
+          },
+          beschikbaarheid: {
+            type: String,
+            value: ''
           }
         }
       }
@@ -265,11 +269,12 @@
           beschrijving: this.beschrijving,
           prijs: this.prijs,
           ingredienten: this.ingredientLijst,
-          label: this.label,
+          label: this.label.toLocaleLowerCase(),
           status: '',
         }
 
-        if (this.gerechtNaam !== '' && parseInt(this.prijs) !== 0 && this.prijs !== '' && this.ingredientLijst.length !== 0) {
+        if (this.gerechtNaam !== '' && parseInt(this.prijs) !== 0 && this.prijs !== '' &&
+         this.ingredientLijst.length !== 0 && (this.label.toLowerCase() === 'groot' || this.label.toLocaleLowerCase() === 'klein')) {
           this.showModel2 = !this.showModel2;
           this.showModel = !this.showModel;
           this.abc(nieuwGerecht)
