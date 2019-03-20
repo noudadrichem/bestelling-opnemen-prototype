@@ -119,7 +119,7 @@
             value: {
               appel: true,
               kaas: true,
-              Zalm: true,
+              zalm: true,
               banaan: true,
               peer: true,
             }
@@ -148,11 +148,7 @@
 
             }
 
-            if (staat) {
-              gerecht.beschikbaarheid = 'Beschikbaar';
-            } else {
-              gerecht.beschikbaarheid = 'Niet beschikbaar';
-            }
+            gereht.beschikbaarheid = staat
 
         }
       }
@@ -162,6 +158,7 @@
       addNewGerechtObjectToList(nieuwGerecht) {
         const toeTeVoegen = {
           ...nieuwGerecht,
+          beschikbaarheid: false,
           id: this.alleGerechten.length
         }
 

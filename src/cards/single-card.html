@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/vaadin-button/vaadin-button.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
 
 <dom-module id="single-card">
   <template>
@@ -111,7 +112,11 @@
       <div>
         <!-- <span>00:11:13</span> -->
         <label class="label">{{ item.label }}</label>
-        <beschikbaarheid class="beschikbaarheid">{{ item.beschikbaarheid }}</beschikbaarheid>
+        <beschikbaarheid class="beschikbaarheid">
+          <template is="dom-if" if="{{item.beschikbaarheid}}">beschikbaar</template>
+          <template is="dom-if" if="{{!item.beschikbaarheid}}">Niet beschikbaar</template>
+
+        </beschikbaarheid>
         <span>
           <template is="dom-if" if={{showModel2}}>
             <button class="btn secondary" on-click="toggleModel" data-args="wordt bereidt">Delete</button>
