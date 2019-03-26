@@ -131,7 +131,6 @@
         var staat = status;
         for (var i=0; i < this.alleGerechten.length; i++) {
               var gerecht = this.alleGerechten[i]
-                console.log(gerecht)
 
              for (var g=0; g < gerecht.ingredienten.length; g++) {
               var ingredient = gerecht.ingredienten[g];
@@ -148,12 +147,10 @@
 
             }
 
-            gereht.beschikbaarheid = staat
+            gerecht.beschikbaarheid = staat
 
         }
       }
-
-
 
       addNewGerechtObjectToList(nieuwGerecht) {
         const toeTeVoegen = {

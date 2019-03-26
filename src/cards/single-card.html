@@ -115,10 +115,9 @@
         <beschikbaarheid class="beschikbaarheid">
           <template is="dom-if" if="{{item.beschikbaarheid}}">beschikbaar</template>
           <template is="dom-if" if="{{!item.beschikbaarheid}}">Niet beschikbaar</template>
-
         </beschikbaarheid>
         <span>
-          <template is="dom-if" if={{showModel2}}>
+          <template is="dom-if" if="{{showDeleteButton}}">
             <button class="btn secondary" on-click="toggleModel" data-args="wordt bereidt">Delete</button>
           </template>
 
@@ -154,6 +153,8 @@
     class SingleCard extends Polymer.Element {
       constructor() {
         super();
+
+        this.showDeleteButton = window.location.pathname === '/'
       }
 
       static get is() {
@@ -182,9 +183,9 @@
             type: Boolean,
             value: false,
           },
-          showModel2: {
+          showDeleteButton: {
             type: Boolean,
-            value: true,
+            value: false,
           },
         }
       }
