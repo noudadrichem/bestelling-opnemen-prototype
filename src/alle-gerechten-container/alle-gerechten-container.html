@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<!-- <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html"> -->
 <link rel="import" href="../cards/container.html">
 <link rel="import" href="../toevoegen-verwijderen/gerecht-toevoegen.html">
 <link rel="import" href="../toevoegen-verwijderen/gerecht-verwijderen.html">
@@ -14,6 +15,13 @@
         display: block;
       }
 
+      .beschikbare-ingredienten ul {
+        padding-left: 24px;
+      }
+      .beschikbare-ingredienten h4 {
+        font-weight: bold;
+      }
+
     </style>
 
     <div class="container">
@@ -21,18 +29,19 @@
       <div class="row">
         <div class="8 col">
 
-          <cards-container
-            gerechten="{{alleGerechten}}"
-            cta="Bestel"
-            titel="Alle gerechten"
-          />
+          <cards-container gerechten="{{alleGerechten}}" cta="Bestel" titel="Alle gerechten" />
 
         </div>
 
         <div class="4 col">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur amet accusamus
-            laboriosam cumque dicta nobis nisi doloribus impedit quia consectetur magni magnam nemo dignissimos alias,
-            ex quod nesciunt, voluptas repudiandae.</p>
+          <div class="beschikbare-ingredienten">
+            <h5>Beschikbare ingredienten</h5>
+            <ul>
+              <template is="dom-repeat" items="{{beschikbaarIngredienten}}" as="ingredient">
+                <li>{{ ingredient }}</li>
+              </template>
+            </ul>
+          </div>
 
           <a href="/wachtrij.html" class="btn">Bekijk wachtrij</a>
           <a href="/besteld.html" class="btn">Bekijk bereidingen</a>
@@ -65,7 +74,7 @@
       ready() {
         super.ready();
         this.getSetLocalStorageData('GERECHTEN', this.alleGerechten)
-        console.log(this.beschikbaarIngrediënten)
+        console.log(this.beschikbaarIngredienten)
         this.ingrediëntenCheck()
       }
 
@@ -84,70 +93,71 @@
             type: Array,
             value: [{
                 id: 0,
-                naam: 'Gerecht 1',
-                beschrijving: 'Dit is een beschrijvin van gerecht 1',
+                naam: 'Pasta Bolognese',
+                beschrijving: 'Een overheerlijk italiaans gerecht gemaakt met de verste ingredienten',
                 prijs: 4.95,
-                ingredienten: ['appel', 'peer'],
+                ingredienten: ['pasta', 'tomaat', 'gehakt'],
                 label: 'Groot',
-                status: 'wordt bereidt', // een van ['', besteld', 'wordt bereidt', 'is bereidt']
+                status: '', // een van ['', besteld', 'wordt bereidt', 'is bereidt']
                 beschikbaarheid: false,
               },
               {
                 id: 1,
-                naam: 'Gerecht 2',
-                beschrijving: 'Dit is een beschrijvin van gerecht 2',
+                naam: 'Panini caprese',
+                beschrijving: 'Een overheerlijke panini met buffel mozzarela, pesto en tomaat.',
                 prijs: 12.50,
-                ingredienten: ['citroen', 'perzik'],
-                label: 'Groot',
-                status: ' ', // een van ['besteld', 'wordt bereidt', 'is bereidt']
+                ingredienten: ['mozzarella', 'pesto', 'tomaat'],
+                label: 'klein',
+                status: '', // een van ['besteld', 'wordt bereidt', 'is bereidt']
                 beschikbaarheid: false,
               },
               {
                 id: 2,
-                naam: 'Gerecht 3',
-                beschrijving: 'Dit is een beschrijvin van gerecht 3',
+                naam: '10 Sushi rolls',
+                beschrijving: 'Een gevarieerd gerecht met verschillende ',
                 prijs: 14.95,
                 ingredienten: ['banaan', 'ei', 'kaas'],
                 label: 'Klein',
-                status: 'besteld', // een van ['besteld', 'wordt bereidt', 'is bereidt']
+                status: '', // een van ['besteld', 'wordt bereidt', 'is bereidt']
                 beschikbaarheid: false,
               },
             ]
           },
-          beschikbaarIngrediënten: {
-            type: Object,
-            value: {
-              appel: true,
-              kaas: true,
-              zalm: true,
-              banaan: true,
-              peer: true,
-            }
+          beschikbaarIngredienten: {
+            type: Array,
+            value: [
+              'pasta',
+              'kaas',
+              'tomaat',
+              'banaan',
+              'gehakt',
+              'peer',
+            ]
           }
         }
       }
 
       ingrediëntenCheck() {
         var staat = status;
-        for (var i=0; i < this.alleGerechten.length; i++) {
-              var gerecht = this.alleGerechten[i]
+        for (var i = 0; i < this.alleGerechten.length; i++) {
+          var gerecht = this.alleGerechten[i]
 
-             for (var g=0; g < gerecht.ingredienten.length; g++) {
-              var ingredient = gerecht.ingredienten[g];
+          for (var g = 0; g < gerecht.ingredienten.length; g++) {
+            var ingredient = gerecht.ingredienten[g];
 
-                if (Object.keys(this.beschikbaarIngrediënten).includes(ingredient)) {
-                  console.log(gerecht.naam, 'Ja heeft: ', ingredient)
-                  staat = true;
-                } else {
-                  staat = false;
-                  console.log(gerecht.naam, 'Nee heeft geen: ', ingredient)
-                  break;
-                }
-                console.log(staat)
-
+            if (this.beschikbaarIngredienten.includes(ingredient)) {
+              console.log(gerecht.naam, 'Ja heeft: ', ingredient)
+              staat = true;
+            } else {
+              staat = false;
+              console.log(gerecht.naam, 'Nee heeft geen: ', ingredient)
+              break;
             }
+            console.log(staat)
 
-            gerecht.beschikbaarheid = staat
+          }
+
+          gerecht.beschikbaarheid = staat
 
         }
       }
@@ -160,7 +170,6 @@
         }
 
         console.log(
-          'moetje vanuit alle gerechten?',
           this.alleGerechten.length,
           toeTeVoegen
         )
